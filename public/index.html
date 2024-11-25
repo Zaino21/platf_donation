@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campanhas de Doação</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+<!-- Cabeçador -->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="navcor"> 
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="imgs/logodoei.png" alt="Logo Doe" class="logo">
+            </a>            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="campanhas.html">Campanhas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="criar_campanha.html">Criar Campanha</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#authModal">Login/Cadastrar</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Modal de Login/Cadastro -->
+<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="authModalLabel">Login ou Cadastro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Abas de Login e Cadastro -->
+                <ul class="nav nav-tabs" id="authTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Login</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup" type="button" role="tab" aria-controls="signup" aria-selected="false">Cadastrar</button>
+                    </li>
+                </ul>
+                <div class="tab-content pt-3" id="authTabContent">
+                    <!-- Formulário de Login -->
+                    <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                        <form id="loginForm">
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="loginEmail" placeholder="Digite seu e-mail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="loginPassword" placeholder="Digite sua senha" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                        </form>
+                    </div>
+                    <!-- Formulário de Cadastro -->
+                    <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+                        <form id="signupForm">
+                            <div class="mb-3">
+                                <label for="signupName" class="form-label">Nome Completo</label>
+                                <input type="text" class="form-control" id="signupName" placeholder="Digite seu nome completo" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupEmail" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="signupEmail" placeholder="Digite seu e-mail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupPassword" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="signupPassword" placeholder="Digite sua senha" required>
+                            </div>
+                            <button type="submit" class="btn btn-secondary w-100">Cadastrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Alerta de Login Necessário -->
+<div class="modal fade" id="loginAlertModal" tabindex="-1" aria-labelledby="loginAlertModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginAlertModalLabel">Acesso Necessário</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Você precisa se cadastrar ou fazer login para realizar uma doação.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#authModal" data-bs-dismiss="modal">Login/Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Login/Cadastro -->
+<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="authModalLabel">Login ou Cadastro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" id="authTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Login</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup" type="button" role="tab" aria-controls="signup" aria-selected="false">Cadastrar</button>
+                    </li>
+                </ul>
+                <div class="tab-content pt-3" id="authTabContent">
+                    <!-- Formulário de Login -->
+                    <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                        <form id="loginForm">
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="loginEmail" placeholder="Digite seu e-mail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="loginPassword" placeholder="Digite sua senha" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                        </form>
+                    </div>
+                    <!-- Formulário de Cadastro -->
+                    <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+                        <form id="signupForm">
+                            <div class="mb-3">
+                                <label for="signupName" class="form-label">Nome Completo</label>
+                                <input type="text" class="form-control" id="signupName" placeholder="Digite seu nome completo" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupEmail" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="signupEmail" placeholder="Digite seu e-mail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupPassword" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="signupPassword" placeholder="Digite sua senha" required>
+                            </div>
+                            <button type="submit" class="btn btn-secondary w-100">Cadastrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Conteúdo do Main -->
+<main class="container my-5">
+    <h1 class="text-center mb-4">Campanhas de Doação</h1>
+    <section id="campanha-list" class="row">
+        <!-- Publicação de campanha estilo Instagram -->
+        <article class="col-md-8 offset-md-2 mb-4">
+            <div class="card shadow-sm">
+                <!-- Título da Campanha acima do slider -->
+                <div class="card-header">
+                    <h5 class="card-title">Título da Campanha</h5>
+                </div>
+                
+                <!-- Slider/carousel -->
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="imgs/logodoei.png" class="d-block w-100" alt="Imagem da campanha 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="imgs/logodoei.png" class="d-block w-100" alt="Imagem da campanha 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="imgs/logodoei.png" class="d-block w-100" alt="Imagem da campanha 3">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                
+                <!-- Corpo do card com o restante das informações -->
+                <div class="card-body">
+                    <p class="card-text">Descrição breve da campanha de doação, explicando os objetivos e o impacto esperado.</p>
+                    <p><strong>Meta:</strong> R$ 10.000</p>
+                    <p><strong>Total Doado:</strong> R$ 2.500</p>
+                    <div class="progress mb-3">
+                        <div class="progress-bar" role="progressbar" style="width: 25%;">25%</div>
+                    </div>
+                    <div class="comment-section mb-3">
+                        <h6>Comentários</h6>
+                        <p><strong>Usuário1:</strong> Excelente iniciativa!</p>
+                        <p><strong>Usuário2:</strong> Vou doar, espero que alcance a meta!</p>
+                    </div>
+                    <form class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Escreva um comentário...">
+                        <button class="btn btn-primary" type="button">Comentar</button>
+                    </form>
+                    <a href="doacao.html" class="btn btn-success w-100" onclick="checkLogin(event)">Doar</a>
+                </div>
+            </div>
+        </article>
+    </section>
+    <div id="loading" class="text-center my-4" style="display: none;">
+        <div class="spinner-border text-primary">
+            <span class="visually-hidden">Carregando...</span>
+        </div>
+    </div>
+</main>
+
+<footer class="footer-custom text-center py-3 mt-5">
+    © Todos os direitos reservados a Zaiknown
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="main.js" defer></script>
+</body>
+</html>

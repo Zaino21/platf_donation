@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doação</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Cabeçador -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="navcor"> 
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="imgs/logodoei.png" alt="Logo Doe" class="logo">
+                </a>            
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+                        <li class="nav-item"><a class="nav-link" href="campanhas.html">Campanhas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="criar_campanha.html">Criar Campanha</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#authModal">Login/Cadastrar</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Modal de Login/Cadastro -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="authModalLabel">Login ou Cadastro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Abas de Login e Cadastro -->
+                    <ul class="nav nav-tabs" id="authTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Login</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup" type="button" role="tab" aria-controls="signup" aria-selected="false">Cadastrar</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content pt-3" id="authTabContent">
+                        <!-- Formulário de Login -->
+                        <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                            <form id="loginForm">
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">E-mail</label>
+                                    <input type="email" class="form-control" id="loginEmail" placeholder="Digite seu e-mail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loginPassword" class="form-label">Senha</label>
+                                    <input type="password" class="form-control" id="loginPassword" placeholder="Digite sua senha" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                            </form>
+                        </div>
+                        <!-- Formulário de Cadastro -->
+                        <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+                            <form id="signupForm">
+                                <div class="mb-3">
+                                    <label for="signupName" class="form-label">Nome Completo</label>
+                                    <input type="text" class="form-control" id="signupName" placeholder="Digite seu nome completo" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="signupEmail" class="form-label">E-mail</label>
+                                    <input type="email" class="form-control" id="signupEmail" placeholder="Digite seu e-mail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="signupPassword" class="form-label">Senha</label>
+                                    <input type="password" class="form-control" id="signupPassword" placeholder="Digite sua senha" required>
+                                </div>
+                                <button type="submit" class="btn btn-secondary w-100">Cadastrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Alerta de Login Necessário -->
+    <div class="modal fade" id="loginAlertModal" tabindex="-1" aria-labelledby="loginAlertModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginAlertModalLabel">Acesso Necessário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Você precisa se cadastrar ou fazer login para realizar uma doação.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#authModal" data-bs-dismiss="modal">Login/Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Faça uma Doação</h2>
+
+        <form>
+            <!-- Campo de Valor, oculto inicialmente -->
+            <div class="mb-3 d-none" id="valor-container">
+                <label for="valor" class="form-label">Valor da Doação:</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="text" class="form-control" id="valor" placeholder="0,00" required>
+                </div>
+            </div>
+
+            <!-- Escolha do Método de Pagamento -->
+            <div class="mb-3">
+                <label for="metodo-pagamento" class="form-label">Escolha o método de pagamento:</label>
+                <select id="metodo-pagamento" class="form-select" required>
+                    <option selected disabled>Selecione</option>
+                    <option value="credito">Cartão de Crédito</option>
+                    <option value="debito">Cartão de Débito</option>
+                    <option value="pix">PIX</option>
+                </select>
+            </div>
+
+            <!-- Campos para Cartão (Crédito ou Débito) -->
+            <div id="cartao-info" class="d-none">
+                <h5 class="mb-3">Informações do Cartão</h5>
+                <div class="mb-3">
+                    <label for="nome-completo" class="form-label">Nome Completo</label>
+                    <input type="text" class="form-control" id="nome-completo" placeholder="Digite seu nome completo">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail">
+                </div>
+                <div class="mb-3">
+                    <label for="cpf" class="form-label">CPF</label>
+                    <input type="text" class="form-control" id="cpf" placeholder="xxx.xxx.xxx-xx" maxlength="14">
+                </div>
+                <div class="mb-3">
+                    <label for="numero-cartao" class="form-label">Número do Cartão</label>
+                    <input type="text" class="form-control" id="numero-cartao" placeholder="xxxx xxxx xxxx xxxx" maxlength="19">
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="validade" class="form-label">Data de Validade</label>
+                        <input type="text" class="form-control" id="validade" placeholder="MM/AA" maxlength="5">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="codigo-seguranca" class="form-label">Código de Segurança</label>
+                        <input type="text" class="form-control" id="codigo-seguranca" placeholder="CVV" maxlength="3">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campos para PIX -->
+            <div id="pix-info" class="d-none">
+                <h5 class="mb-3">Informações para PIX</h5>
+                <div class="mb-3">
+                    <label for="pix-nome-completo" class="form-label">Nome Completo</label>
+                    <input type="text" class="form-control" id="pix-nome-completo" placeholder="Digite seu nome completo">
+                </div>
+                <div class="mb-3">
+                    <label for="pix-email" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" id="pix-email" placeholder="Digite seu e-mail">
+                </div>
+                <div class="mb-3">
+                    <label for="pix-cpf" class="form-label">CPF</label>
+                    <input type="text" class="form-control" id="pix-cpf" placeholder="xxx.xxx.xxx-xx" maxlength="14">
+                </div>
+            </div>
+
+            <!-- Botão de Submissão -->
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Confirmar Doação</button>
+            </div>
+        </form>
+    </div>
+
+    <footer class="footer-custom text-center py-3 mt-5">
+        © Todos os direitos reservados a Zaiknown
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Exibir valor da doação após selecionar método de pagamento
+        document.addEventListener('DOMContentLoaded', function () {
+            const metodoPagamentoSelect = document.getElementById('metodo-pagamento');
+            const valorContainer = document.getElementById('valor-container');
+            const cartaoInfo = document.getElementById('cartao-info');
+            const pixInfo = document.getElementById('pix-info');
+
+            metodoPagamentoSelect.addEventListener('change', function () {
+                // Exibe o campo de valor da doação ao selecionar o método de pagamento
+                valorContainer.classList.remove('d-none');
+
+                // Alterna entre informações de cartão e PIX
+                if (this.value === 'credito' || this.value === 'debito') {
+                    cartaoInfo.classList.remove('d-none');
+                    pixInfo.classList.add('d-none');
+                } else if (this.value === 'pix') {
+                    pixInfo.classList.remove('d-none');
+                    cartaoInfo.classList.add('d-none');
+                }
+            });
+        });
+    </script>
+    <script src="doar.js" defer></script>
+</body>
+</html>

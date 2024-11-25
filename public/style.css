@@ -1,0 +1,202 @@
+.modal-content {
+    border-radius: 8px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    background-color: #007bff; 
+    color: #ffffff;
+    border-bottom: none;
+    padding: 16px 24px;
+}
+.modal-header .btn-close {
+    color: #ffffff;
+}
+
+#authTab .nav-link {
+    color: #007bff;
+    border-radius: 0;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+#authTab .nav-link.active {
+    background-color: #007bff;
+    color: #ffffff;
+    border-color: #007bff;
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+#login input {
+    border-radius: 4px;
+    border-color: #007bff;
+    margin-bottom: 16px;
+    padding: 12px;
+}
+#login button {
+    background-color: #007bff;
+    border: none;
+    font-weight: bold;
+    padding: 10px 0;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+#login button:hover {
+    background-color: #0056b3;
+}
+
+#signup input {
+    border-radius: 4px;
+    border-color: #28a745;
+    margin-bottom: 16px;
+    padding: 12px;
+}
+#signup button {
+    background-color: #28a745;
+    border: none;
+    font-weight: bold;
+    padding: 10px 0;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+#signup button:hover {
+    background-color: #218838;
+}
+
+.modal-body label {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+#login input:focus,
+#signup input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilo da logo no navbar */
+.navbar-brand .logo {
+    max-height: 50px;
+    width: auto; /* Mantém a proporção */
+    transition: transform 0.3s ease;
+}
+.navbar-brand .logo:hover {
+    transform: scale(1.1); /* Efeito de aumento ao passar o mouse */
+}
+
+/* Alterar a cor do navbar */
+#navcor {
+    background-color: #a8dfea !important;
+    border-color: #a8dfea;
+}
+
+/* Links na navbar */
+.navbar-dark .navbar-nav .nav-link {
+    color: #333333;
+    font-weight: 600;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #0079a1;
+}
+
+.btn-primary {
+    background-color: #0079a1;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #005f81;
+}
+
+.btn-secondary {
+    background-color: #2ea44f;
+    border: none;
+}
+
+/* Cores do Modal */
+.modal-header {
+    background-color: #0079a1;
+    color: #ffffff;
+}
+
+.modal-body label {
+    color: #555;
+}
+
+.form-control {
+    border: 1px solid #0079a1;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.form-control:focus {
+    border-color: #0079a1;
+    box-shadow: 0 0 5px rgba(0, 121, 161, 0.3);
+}
+
+/* Texto secundário */
+.comment-section p,
+.modal-body p {
+    color: #555;
+}
+
+h1, h5 {
+    color: #0079a1;
+}
+
+.progress-bar {
+    background-color: #2ea44f;
+}
+
+.modal-title {
+    color: white;
+}
+
+.footer-custom {
+    background-color: #a8dfea;
+    color: #333;
+    font-weight: bold;
+    position: relative;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+/* Diminuindo o tamanho dos sliders */
+.carousel-inner img {
+    max-width: 80%; /* Ajuste para o tamanho desejado */
+    max-height: 400px; /* Altura máxima desejada */
+    margin: 0 auto; /* Centraliza a imagem dentro do slider */
+    object-fit: cover; /* Corta a imagem para cobrir o espaço sem distorção */
+}
+
+.carousel-control-prev {
+    background-color: #333;
+    width: 85.7px;
+}
+
+.carousel-control-next {
+    background-color: #333333;
+    width: 85.7px;
+}
+
+.card-header {
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}

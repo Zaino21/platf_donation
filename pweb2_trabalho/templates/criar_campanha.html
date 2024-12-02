@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Campanha</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href={% static 'CSS/style.css' %}>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark" id="navcor">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    <img src= "{%static 'imgs/logodoei.png' %}" alt="Logo Doe" class="logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Início</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'campanhas' %}">Campanhas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'criar_campanha' %}">Criar Campanha</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#authModal">Login/Cadastrar</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Modal de Login/Cadastro -->
+<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="authModalLabel">Login ou Cadastro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Abas de Login e Cadastro -->
+                <ul class="nav nav-tabs" id="authTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Login</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup" type="button" role="tab" aria-controls="signup" aria-selected="false">Cadastrar</button>
+                    </li>
+                </ul>
+                <div class="tab-content pt-3" id="authTabContent">
+                    <!-- Formulário de Login -->
+                    <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                        <form id="loginForm" method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="loginEmail" name="username" placeholder="Digite seu e-mail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Digite sua senha" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                        </form>
+                    </div>
+                    <!-- Formulário de Cadastro -->
+                    <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+                        <form id="signupForm" method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="signupName" class="form-label">Nome Completo</label>
+                                <input type="text" class="form-control" id="signupName" name="username" placeholder="Digite seu nome completo" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupEmail" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="signupEmail" name="email" placeholder="Digite seu e-mail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupPassword" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="signupPassword" name="password" placeholder="Digite sua senha" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupConfirmPassword" class="form-label">Confirmar Senha</label>
+                                <input type="password" class="form-control" id="signupConfirmPassword" name="confirm_password" placeholder="Confirme sua senha" required>
+                            </div>
+                            <button type="submit" class="btn btn-secondary w-100">Cadastrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="main-container">
+        <h1 class="text-center my-4">Criar Nova Campanha</h1>
+        <div class="form-container">
+            <form action="#" method="POST" enctype="multipart/form-data" onsubmit="checkLogin(event)" novalidate>
+                <div class="mb-3">
+                    <label for="titulo" class="form-label">Título da Campanha</label>
+                    <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Digite o título da campanha" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="descricao" class="form-label">Descrição</label>
+                    <textarea class="form-control" id="descricao" name="descricao" rows="3" placeholder="Descreva a campanha" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="meta" class="form-label">Meta (R$)</label>
+                    <input type="number" class="form-control" id="meta" name="meta" placeholder="Digite a meta de arrecadação" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="imagem" class="form-label">Imagem da Campanha</label>
+                    <input type="file" class="form-control" id="imagem" name="imagem" required>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">Criar Campanha</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer-custom text-center py-3 mt-5">
+        © Todos os direitos reservados a Zaiknown
+    </footer>
+
+    <script src="{% static 'JS/main.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

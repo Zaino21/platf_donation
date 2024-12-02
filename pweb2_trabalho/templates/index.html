@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campanhas de Doação</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href={% static 'CSS/style.css' %}>
 </head>
 <body>
     
@@ -13,17 +14,17 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="navcor"> 
         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="imgs/logodoei.png" alt="Logo Doe" class="logo">
+            <a class="navbar-brand" href="{% url 'index' %}">
+                <img src= "{%static 'imgs/logodoei.png' %}" alt="Logo Doe" class="logo">
             </a>            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
-                    <li class="nav-item"><a class="nav-link" href="campanhas.html">Campanhas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="criar_campanha.html">Criar Campanha</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'campanhas' %}">Campanhas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'criar_campanha' %}">Criar Campanha</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#authModal">Login/Cadastrar</a></li>
                 </ul>
             </div>
@@ -52,32 +53,38 @@
                 <div class="tab-content pt-3" id="authTabContent">
                     <!-- Formulário de Login -->
                     <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-                        <form id="loginForm">
+                        <form id="loginForm" method="post">
+                            {% csrf_token %}
                             <div class="mb-3">
                                 <label for="loginEmail" class="form-label">E-mail</label>
-                                <input type="email" class="form-control" id="loginEmail" placeholder="Digite seu e-mail" required>
+                                <input type="email" class="form-control" id="loginEmail" name="username" placeholder="Digite seu e-mail" required>
                             </div>
                             <div class="mb-3">
                                 <label for="loginPassword" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="loginPassword" placeholder="Digite sua senha" required>
+                                <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Digite sua senha" required>
                             </div>
                             <button type="submit" class="btn btn-primary w-100">Entrar</button>
                         </form>
                     </div>
                     <!-- Formulário de Cadastro -->
                     <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
-                        <form id="signupForm">
+                        <form id="signupForm" method="post">
+                            {% csrf_token %}
                             <div class="mb-3">
                                 <label for="signupName" class="form-label">Nome Completo</label>
-                                <input type="text" class="form-control" id="signupName" placeholder="Digite seu nome completo" required>
+                                <input type="text" class="form-control" id="signupName" name="username" placeholder="Digite seu nome completo" required>
                             </div>
                             <div class="mb-3">
                                 <label for="signupEmail" class="form-label">E-mail</label>
-                                <input type="email" class="form-control" id="signupEmail" placeholder="Digite seu e-mail" required>
+                                <input type="email" class="form-control" id="signupEmail" name="email" placeholder="Digite seu e-mail" required>
                             </div>
                             <div class="mb-3">
                                 <label for="signupPassword" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="signupPassword" placeholder="Digite sua senha" required>
+                                <input type="password" class="form-control" id="signupPassword" name="password" placeholder="Digite sua senha" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupConfirmPassword" class="form-label">Confirmar Senha</label>
+                                <input type="password" class="form-control" id="signupConfirmPassword" name="confirm_password" placeholder="Confirme sua senha" required>
                             </div>
                             <button type="submit" class="btn btn-secondary w-100">Cadastrar</button>
                         </form>
@@ -178,13 +185,13 @@
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="imgs/logodoei.png" class="d-block w-100" alt="Imagem da campanha 1">
+                            <img src="{%static 'imgs/logodoei.png' %}" class="d-block w-100" alt="Imagem da campanha 1">
                         </div>
                         <div class="carousel-item">
-                            <img src="imgs/logodoei.png" class="d-block w-100" alt="Imagem da campanha 2">
+                            <img src="{%static 'imgs/logodoei.png' %}" class="d-block w-100" alt="Imagem da campanha 2">
                         </div>
                         <div class="carousel-item">
-                            <img src="imgs/logodoei.png" class="d-block w-100" alt="Imagem da campanha 3">
+                            <img src="{%static 'imgs/logodoei.png' %}" class="d-block w-100" alt="Imagem da campanha 3">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -232,6 +239,6 @@
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="main.js" defer></script>
+<script src="{% static 'JS/main.js' %}"></script>
 </body>
 </html>

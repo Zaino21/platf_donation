@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="navcor"> 
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    <img src="{% static 'imgs/logodoei.png' %}" alt="Logo Doe" class="logo">
+                </a>            
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Início</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="{% url 'perfil' %}">Meu Perfil</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Sair</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="container my-5">
+        <div class="form-container">
+            <h1 class="text-center mb-4">Meu Perfil</h1>
+            <form method="post" action="{% url 'atualizar_perfil' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username" class="form-label">Nome de Usuário:</label>
+                    <input type="text" name="username" id="username" class="form-control" value="{{ user.username }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" name="email" id="email" class="form-control" value="{{ user.email }}" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Atualizar Perfil</button>
+            </form>
+            <div class="text-center mt-4">
+                <a href="{% url 'index' %}" class="btn btn-secondary">Voltar ao Início</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-custom text-center py-3 mt-5">
+        © Todos os direitos reservados a Zaiknown
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

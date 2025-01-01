@@ -21,13 +21,43 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     alert('Login realizado com sucesso!');
 });
 
-document.getElementById('signupForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    isLoggedIn = true;
-    const signupModal = bootstrap.Modal.getInstance(document.getElementById('authModal'));
-    signupModal.hide();
-    alert('Cadastro realizado com sucesso!');
+document.addEventListener("DOMContentLoaded", function () {
+    const signupForm = document.getElementById("signupForm");
+
+    signupForm.addEventListener("submit", async function (e) {
+        e.preventDefault(); // Impede o envio padrão do formulário
+
+        const formData = new FormData(signupForm);
+        const url = signupForm.getAttribute("action");
+        
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-CSRFToken": formData.get("csrfmiddlewaretoken"),
+                },
+            });
+            const data = await response.json();
+            console.log(data); // Debug
+        } catch (error) {
+            console.error("Erro no envio do formulário:", error);
+        }        
+    });
 });
+
+// Função de verificação de login ao clicar no botão de criar campanha
+function checkLogin(event) {
+    if (!isLoggedIn) {
+        // Impede a submissão do formulário
+        event.preventDefault();
+
+        // Exibe o modal de autenticação diretamente
+        const loginAlertModal = new bootstrap.Modal(document.getElementById('authModal'));
+        loginAlertModal.show();
+    }
+}
+
 
 // Adiciona o evento de verificação de login ao formulário de criação de campanha, se existir na página
 document.addEventListener('DOMContentLoaded', function () {
@@ -96,3 +126,4 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+

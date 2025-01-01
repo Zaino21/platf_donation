@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
-# Usando o modelo de usuário personalizado
 User = get_user_model()
 
 # Views principais
@@ -22,23 +21,8 @@ def criar_campanha(request):
 def doacao(request):
     return render(request, 'doacao.html')
 
-# View para login via modal
-@ensure_csrf_cookie
-def login_modal_view(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user:
-            login(request, user)
-            return JsonResponse({'success': True, 'message': 'Login realizado com sucesso!'})
-        else:
-            return JsonResponse({'success': False, 'message': 'Usuário ou senha inválidos.'})
-    return JsonResponse({'success': False, 'message': 'Requisição inválida.'})
-
-# View para cadastro via modal
-@ensure_csrf_cookie
-def cadastro_modal_view(request):
+# Página de registro
+def registro(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
@@ -47,29 +31,64 @@ def cadastro_modal_view(request):
 
         # Validações
         if not username or not email or not password or not confirm_password:
-            return JsonResponse({'success': False, 'message': 'Todos os campos são obrigatórios.'})
+            messages.error(request, 'Todos os campos são obrigatórios.')
+            return redirect('registro')
 
         if password != confirm_password:
-            return JsonResponse({'success': False, 'message': 'As senhas não coincidem.'})
+            messages.error(request, 'As senhas não coincidem.')
+            return redirect('registro')
 
         try:
             validate_email(email)
         except ValidationError:
-            return JsonResponse({'success': False, 'message': 'Email inválido.'})
+            messages.error(request, 'Email inválido.')
+            return redirect('registro')
 
         if User.objects.filter(username=username).exists():
-            return JsonResponse({'success': False, 'message': 'Usuário já existe.'})
+            messages.error(request, 'Usuário já existe.')
+            return redirect('registro')
 
         if User.objects.filter(email=email).exists():
-            return JsonResponse({'success': False, 'message': 'Email já está em uso.'})
+            messages.error(request, 'Email já está em uso.')
+            return redirect('registro')
 
         try:
-            # Criação do usuário
             user = User.objects.create_user(username=username, email=email, password=password)
             user.save()
-            return JsonResponse({'success': True, 'message': 'Cadastro realizado com sucesso!'})
+            messages.success(request, 'Cadastro realizado com sucesso!')
+            return redirect('login')
         except Exception as e:
-            # Captura erros inesperados
-            return JsonResponse({'success': False, 'message': f'Ocorreu um erro: {str(e)}'})
+            messages.error(request, f'Ocorreu um erro: {e}')
+            return redirect('registro')
 
-    return JsonResponse({'success': False, 'message': 'Requisição inválida.'})
+    return render(request, 'registro.html')
+
+# Página de login
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user:
+            login(request, user)
+            messages.success(request, 'Login realizado com sucesso!')
+            return redirect('index')
+        else:
+            messages.error(request, 'Usuário ou senha inválidos.')
+            return redirect('login')
+
+    return render(request, 'login.html')
+
+
+@login_required
+def perfil_view(request):
+    return render(request, 'meuperfil.html')
+
+@login_required
+def atualizar_perfil(request):
+    if request.method == 'POST':
+        user = request.user
+        user.username = request.POST.get('username')
+        user.email = request.POST.get('email')
+        user.save()
+        return redirect('perfil')
